@@ -77,6 +77,25 @@ namespace BankidyBanking
             Console.WriteLine($"Your balance is: {_balance}.");
         }
 
+        public static void DepositMenu()
+        {
+            Console.WriteLine("Please enter an amount to deposit.");
+            try
+            {
+                string userSum = Console.ReadLine();
+                int sum = Convert.ToInt32(userSum);
+                Deposit(sum);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Sorry, invalid input.");
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+
         public static void Deposit(int amount)
         {
             if (amount >= 0)
