@@ -48,7 +48,7 @@ namespace BankidyBanking
                     
                 } catch (FormatException)
                 {
-                    Console.WriteLine("Sorry, that was an invalid input. Please try entering 1, 2, 3, or 4.");
+                    Console.WriteLine("Sorry, that was an invalid input.");
                 } catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -83,20 +83,30 @@ namespace BankidyBanking
             try
             {
                 string userSum = Console.ReadLine();
-                int sum = Convert.ToInt32(userSum);
+                decimal sum = Convert.ToDecimal(userSum);
                 Deposit(sum);
             }
-            catch (FormatException)
+            catch
             {
-                Console.WriteLine("Sorry, invalid input.");
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
-
-        public static void Deposit(int amount)
+        public static void WithdrawMenu()
+        {
+            Console.WriteLine("Please enter the amount you would like to withdraw.");
+            try
+            {
+                string userSum = Console.ReadLine();
+                decimal sum = Convert.ToDecimal(userSum);
+                Withdraw(sum);
+            } catch
+            {
+                throw;
+            }
+        }
+        
+        public static void Deposit(decimal amount)
         {
             if (amount >= 0)
             {
@@ -108,9 +118,21 @@ namespace BankidyBanking
             }
         }
 
-        public static void Withdraw(int amount)
-        {
+       
 
+        public static void Withdraw(decimal amount)
+        {
+            if (amount > _balance)
+            {
+                Console.WriteLine("Insufficient funds. :(");
+            } else if (amount < 0)
+            {
+                Console.WriteLine("Sorry, but negative withdrawal amounts are not accepted. Please use \"deposit\" to place funds in your account.");
+            } else
+            {
+                _balance -= amount;
+                Console.WriteLine($"Dispensing ${amount} from your account.");
+            }
         }
     }
 }
