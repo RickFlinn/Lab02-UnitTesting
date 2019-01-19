@@ -21,4 +21,4 @@ Program._balance = 400;
 Console.WriteLine(Program._balance); // 400
 ```
 
-As such
+]
